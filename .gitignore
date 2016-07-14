@@ -27,6 +27,7 @@ coverage
 build/Release
 
 # Dependency directories
+bower_components
 node_modules
 jspm_packages
 
@@ -35,3 +36,10 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# Text editors and IDE files
+.idea
+
+# build folders
+build/
+temp/
