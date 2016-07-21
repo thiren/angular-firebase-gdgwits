@@ -253,7 +253,7 @@ function shouldMinify() {
     return true;
 }
 
-gulp.task('test:build', ['test:clean', 'test:constants', 'test:html']);
+gulp.task('test:build', ['test:clean', 'test:app-js', 'test:vendor-js', 'test:constants', 'test:html']);
 
 gulp.task('test:clean', function (callback) {
     var options = {
@@ -265,11 +265,36 @@ gulp.task('test:clean', function (callback) {
     });
 });
 
+gulp.task('test:app-js', function () {
+    return gulp.src(config.appFiles.js)
+        .pipe(angularFilesort())
+        .pipe(ngAnnotate())
+        .pipe(babel({presets: ['es2015']}))
+        .pipe(concat(config.names.output.appJs))
+        .pipe(uglify())
+        .pipe(gulp.dest(config.outputPaths.testDependencies));
+});
+
+gulp.task('test:vendor-js', function () {
+    var vendorJsSourceFiles = gulp.src(config.vendorFiles.js);
+    var options = {
+        filter: '**/*.js',
+        debugging: false
+    };
+    var mainBowerSourceFiles = gulp.src(mainBowerFiles(options), {
+        base: 'bower_components'
+    });
+    return eventStream.merge(vendorJsSourceFiles, mainBowerSourceFiles)
+        .pipe(ngAnnotate())
+        .pipe(concat(config.names.output.vendorJs))
+        .pipe(uglify())
+        .pipe(gulp.dest(config.outputPaths.testDependencies));
+});
+
 gulp.task('test:constants', ['test:clean'], function () {
     return gulp.src(config.appFiles.constants)
         .pipe(gulpNgConfig(config.names.constantsModule, gulpNgConfigOptions))
         .pipe(uglify())
-        .pipe(rev())
         .pipe(gulp.dest(config.outputPaths.testDependencies));
 });
 
@@ -278,6 +303,5 @@ gulp.task('test:html', ['test:clean'], function () {
         .pipe(htmlmin(htmlminOptions))
         .pipe(templateCache(config.names.output.templatesJs, templateCacheOptions))
         .pipe(uglify())
-        .pipe(rev())
         .pipe(gulp.dest(config.outputPaths.testDependencies))
 });
