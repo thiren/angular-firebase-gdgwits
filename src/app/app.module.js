@@ -2,15 +2,16 @@
     'use strict';
 
     angular.module('demoApp', [
-            'ngAnimate',
-            'ngAria',
-            'ngMessages',
-            'ngResource',
-            'ui.router',
-            'demoApp.templates',
-            'demoApp.constants',
-            'demoApp.header'
-        ])
+        'firebase',
+        'ngAnimate',
+        'ngAria',
+        'ngMessages',
+        'ngResource',
+        'ui.router',
+        'demoApp.templates',
+        'demoApp.constants',
+        'demoApp.header'
+    ])
         .config(configure)
         .run(run);
 
@@ -28,7 +29,7 @@
             .state('app', {
                 url: "",
                 abstract: true,
-                views :{
+                views: {
                     "header@": {
                         templateUrl: "header/header.tpl.html",
                         controller: 'HeaderCtrl',
