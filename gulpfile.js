@@ -140,8 +140,8 @@ gulp.task('vendor-js', function () {
 
 gulp.task('font', function () {
     return gulp.src(mainBowerFiles({
-            filter: '**/*.{eot,svg,ttf,woff,woff2}'
-        }))
+        filter: '**/*.{eot,svg,ttf,woff,woff2}'
+    }))
         .pipe(gulp.dest(config.outputPaths.fonts));
 });
 
@@ -265,7 +265,7 @@ gulp.task('test:clean', function (callback) {
     });
 });
 
-gulp.task('test:app-js', function () {
+gulp.task('test:app-js', ['test:clean'], function () {
     return gulp.src(config.appFiles.js)
         .pipe(angularFilesort())
         .pipe(ngAnnotate())
@@ -275,7 +275,7 @@ gulp.task('test:app-js', function () {
         .pipe(gulp.dest(config.outputPaths.testDependencies));
 });
 
-gulp.task('test:vendor-js', function () {
+gulp.task('test:vendor-js', ['test:clean'], function () {
     var vendorJsSourceFiles = gulp.src(config.vendorFiles.js);
     var options = {
         filter: '**/*.js',
