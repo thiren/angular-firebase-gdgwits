@@ -1,7 +1,7 @@
 {
   "name": "angular-firebase-gdgwits",
   "version": "0.0.0",
-  "description": "An intro to angular firebase",
+  "description": "An intro to angular and firebase",
   "main": "index.html",
   "scripts": {
     "setup": "npm install",

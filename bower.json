@@ -5,7 +5,7 @@
   "authors": [
     "Thiren Bunsee"
   ],
-  "description": "An intro to angular firebase",
+  "description": "An intro to angular and firebase",
   "main": "index.html",
   "keywords": [
     "angular",
@@ -26,9 +26,9 @@
     "angular-messages": "1.5.8",
     "angular-resource": "1.5.8",
     "angular-ui-router": "ui-router#0.3.1",
-    "angular-bootstrap": "2.0.0",
+    "angular-bootstrap": "2.0.1",
     "bootstrap": "3.3.6",
-    "firebase": "3.2.0",
+    "firebase": "3.2.1",
     "angularfire": "2.0.1"
   },
   "devDependencies": {
