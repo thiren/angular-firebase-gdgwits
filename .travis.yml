@@ -1,0 +1,50 @@
+language: node_js
+sudo: true
+node_js:
+  - '6'
+addons:
+  firefox: latest
+
+# whitelist
+branches:
+  only:
+    - master
+    - develop
+
+cache:
+  directories:
+    - node_modules
+    - bower_components
+
+install:
+  # Enable browser testing
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  # Check the size of caches
+  - du -sh ./node_modules ./bower_components/ || true
+  # Disable the spinner, it looks bad on Travis
+  - npm config set spin false
+  # Log HTTP requests
+  - npm config set loglevel http
+  # Install npm dependencies and ensure that npm cache is not stale
+  - npm install -g firebase-tools
+  - npm install
+  - node_modules/.bin/bower install
+  - npm run update-webdriver
+
+before_script:
+  - node_modules/.bin/gulp lint
+  - node_modules/.bin/gulp test:build
+  - node_modules/.bin/karma start karma.conf.js
+
+script:
+  - node_modules/.bin/gulp --env=production
+  - node_modules/.bin/gulp start &
+  - sleep 2
+  - node_modules/.bin/protractor protractor.conf.js --browser=firefox
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      sleep 2;
+      firebase deploy --token ${FIREBASE_TOKEN};
+    fi
