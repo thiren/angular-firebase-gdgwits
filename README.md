@@ -1,4 +1,4 @@
-# angular-firebase-gdgwits
+# angular-firebase-gdgwits [![Build Status](https://travis-ci.org/thiren/angular-firebase-gdgwits.svg?branch=develop)](https://travis-ci.org/thiren/angular-firebase-gdgwits)
 An intro to angular firebase
 
 ## Getting Started
