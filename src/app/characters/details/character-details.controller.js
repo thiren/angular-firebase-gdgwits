@@ -24,7 +24,6 @@
                 get: {method: 'GET', url: url + '/:id', cache: true}
             });
 
-        console.log($stateParams);
 
         resource.get({id: $stateParams.id}).$promise.then(function (response) {
             vm.character = response.data[0];
