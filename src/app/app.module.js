@@ -10,7 +10,8 @@
         'ui.router',
         'demoApp.templates',
         'demoApp.constants',
-        'demoApp.header'
+        'demoApp.header',
+        'demoApp.characters'
     ])
         .config(configure)
         .run(run);

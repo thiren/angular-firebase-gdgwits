@@ -1,0 +1,23 @@
+<h1>Marvel characters</h1>
+
+<form ng-submit="vm.search()">
+    <input type="text" ng-model="vm.name">
+    <button type="submit">Search</button>
+</form>
+
+<div ng-repeat="character in vm.characters">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <img ng-src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" alt="" width="100" height="100">
+            </div>
+            <div class="col-md-9">
+                <p>{{character.name}}</p>
+                <p>{{character.description}}</p>
+                <p><a ui-sref="app.character-details({id: character.id})"> view details</a></p>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+</div>
