@@ -11,7 +11,8 @@
         'demoApp.templates',
         'demoApp.constants',
         'demoApp.header',
-        'demoApp.characters'
+        'demoApp.characters',
+        'demoApp.home'
     ])
         .config(configure)
         .run(run);
@@ -42,10 +43,20 @@
                 url: '/home',
                 views: {
                     'content@': {
-                        templateUrl: 'home/home.tpl.html'
+                        templateUrl: 'home/home.tpl.html',
+                        controller: 'HomeCtrl',
+                        controllerAs: 'vm'
                     }
                 }
             });
+
+        var config = {
+            apiKey: "AIzaSyDEAD_mwwdo8drXnInKC31Zy5XPy6Yh0BE",
+            authDomain: "gdgwits-demo.firebaseapp.com",
+            databaseURL: "https://gdgwits-demo.firebaseio.com",
+            storageBucket: "gdgwits-demo.appspot.com",
+        };
+        firebase.initializeApp(config);
     }
 
     run.$inject = ['$rootScope'];

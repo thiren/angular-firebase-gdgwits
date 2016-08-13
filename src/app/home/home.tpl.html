@@ -1,3 +1,6 @@
 <div>
-    <h2>Page Content</h2>
+    <input type="text" ng-model="vm.email">
+    <input type="password" ng-model="vm.password">
+    <button type="button" ng-click="vm.signIn(vm.email, vm.password)">Login</button>
+    <button type="button" ng-click="vm.createUser(vm.email, vm.password)">Create User</button>
 </div>
